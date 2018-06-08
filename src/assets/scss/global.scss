@@ -1,0 +1,75 @@
+@charset "utf-8";
+$base-font-size: 46.875 !default;
+
+
+
+$w: 75;
+
+// @function rem($n) {
+//     @return ($n/$w) + rem;
+// }
+
+$color1: #ffffff;
+
+/**
+*UI
+*/
+$ui_color_black: #333333;
+$ui_color_white: #ffffff;
+$ui_color_gray: #7c7c7c;
+$ui_color_gray_bg: #f0f2f4;
+
+/**
+* components
+*/
+$ax_tabs_height: 104px;
+$ax_navbar_height: 100px;
+
+/**
+*骨架
+*/
+$skeleton_color_bg: #efefef;
+
+
+  // .page-enter-active, .page-leave-active
+  // {
+  //   transition: opacity .5s
+  // }
+  // .page-enter, .page-leave-active
+  // {
+  //   opacity: 0
+  // }
+
+
+//   .app {
+//     height: 100%;
+//   }
+
+//   .view-page {
+//     position: absolute;
+//     width: 100%;
+//     // height: 100%;
+//     // transition: all .5s linear;
+//   }
+//   .slide-left-enter, .slide-right-leave-active {
+//     opacity: 1;
+//     -webkit-transform: translate(100%, 0);
+//     transform: translate(100%, 0);
+//   }
+//   .slide-left-leave-active, .slide-right-enter {
+//     opacity: 1;
+//     -webkit-transform: translate(-100%, 0);
+//     transform: translate(-100%, 0);
+//   }
+//   // .slide-left-enter-active,.slide-left-leave-active {
+//   //   transition: transform .5s linear;
+//   // }
+//   // .slide-right-enter-active,.slide-right-leave-active {
+//   //   transition: transform .5s linear;
+//   // }
+
+  
+// a {
+//   text-decoration: none;
+// }
+  

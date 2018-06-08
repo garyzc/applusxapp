@@ -1,0 +1,17 @@
+@charset "utf-8";
+$base-font-size: 46.875 !default;
+
+@function strip-units($number){
+    @return $number / ($number * 0 + 1);
+  }
+  
+@function pxTorem($target-size,$context:$base-font-size){
+    @if not unitless($target-size){
+        $target-size: strip-units($target-size);    }
+    @if not unitless($context){
+        $context: strip-units($context);
+    }
+    @return ($target-size / $context) * 1rem;
+}
+
+$color1: #ff9900;
