@@ -1,5 +1,5 @@
 <template>
-  <div class="ax-list-item">
+  <div class="ax-list-item" :class="{'ax-list-item-clear':(index+1)%$parent.columns==0}" :style="cstyle">
     <router-link tag="a" :to="to">
       <div class="ax-list-item-img">
         <img :src="data.img" />
@@ -18,6 +18,11 @@
 
     },
     props: {
+      index: {
+        default: () => {
+          return 0
+        }
+      },
       data: {
         default: () => {
           return {}
@@ -36,7 +41,7 @@
       }
     },
     created() {
-
+      // console.log(this.$parent)
     },
     mounted() {
       if (process.browser) {
@@ -44,7 +49,11 @@
       }
     },
     computed: {
-      
+      cstyle: function() {
+        return {
+          width:this.$parent.showType == 'grid' ? (750/this.$parent.columns-20)*0.1333333+'vw' : 'auto',
+          marginLeft:(((750-(750/this.$parent.columns-20)*this.$parent.columns)/(this.$parent.columns*1+1)))*0.1333333+'vw'}
+      }
     },
     methods: {
     }
@@ -57,6 +66,7 @@
   .ax-list-item {
     background-color: $ui_color_white;
     box-sizing: border-box;
+    
     > a {
       display: block;
       color: $ui_color_black;
@@ -87,13 +97,16 @@
 
   .ax-grid-list-grid {
     .ax-list-item {
+      
       // display: inline-flex;
-      width: 373px;
-      height:543px;
+      // width: 373px;
+      // height:543px;
       background-color: $ui_color_white;
       margin-bottom: 4px;
-      padding: 5px;
+      padding: 0px;
       box-sizing: border-box;
+      margin-bottom: 20px;
+      // margin-left: 5%;
       > a {
         display: block;
         color: $ui_color_black;
@@ -102,9 +115,12 @@
           line-height: 32px;
         }
         .ax-list-item-text {
-          height: 60px;
+          height: 64px;
+          // padding: 10px;
           width: 100%;
           margin-top: 10px;
+          margin-bottom: 10px;
+          padding: 0 10px;
           display: -webkit-box;  
           display: -moz-box;  
           overflow: hidden;  
@@ -112,15 +128,17 @@
           word-break: break-all;  
           -webkit-box-orient: vertical;  
           -webkit-line-clamp:2;  
+          box-sizing: border-box;
         }
         .ax-list-item-img {
-          width: 362.5px;
-          height: 362.5px;
+          // width: 372.5px;
+          // height: 372.5px;
           background-color: $skeleton_color_bg;
           display: block;
           img {
             max-width: 100%;
             width: 100%;
+            display: block;
           }
         }
       } 
@@ -140,6 +158,7 @@
       padding: 20px;
       box-sizing: border-box;
       display: flex;
+      
       > a {
         display: flex;
         .ax-list-item-text {
@@ -158,5 +177,7 @@
       }
     }
   }
-  
+  .ax-list-item-clear {
+    margin-right:0!important;
+  }
 </style>

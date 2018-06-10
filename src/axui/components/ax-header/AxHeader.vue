@@ -42,22 +42,27 @@
       if (process.browser) {
         
       }
-      let scrollPage = document.querySelector('.ax-layout-page')
-      if(scrollPage) {
-          scrollPage.addEventListener('scroll', () => {
-              
-              if(scrollPage.scrollTop > 10) {
-              this.$el.classList.add('ax-header-with-bg')
-              } else {
-              this.$el.classList.remove('ax-header-with-bg')
-              }
-          })
-      }
+      window.addEventListener('scroll', () => {
+          if(this.getScrollTop() > 10) {
+          this.$el.classList.add('ax-header-with-bg')
+          } else {
+          this.$el.classList.remove('ax-header-with-bg')
+          }
+      })
     },
     computed: {
       
     },
     methods: {
+      getScrollTop() {
+        var scrollTop=0;  
+        if(document.documentElement&&document.documentElement.scrollTop){  
+            scrollTop=document.documentElement.scrollTop;  
+        }else if(document.body){  
+            scrollTop=document.body.scrollTop;  
+        }  
+        return scrollTop;  
+      },
       handlerSearchCLick() {
         this.$emit('searchClick')
       }
@@ -110,7 +115,7 @@
     color: $ui_color_white;
   }
   .ax-header-with-bg {
-    background-color: rgba(234,101,48,0.9);
+    background-color: rgba(234, 48, 48, 0.9);
     height: 80px;
     padding-bottom: 10px;
   }

@@ -3,10 +3,8 @@
 
     <transitionSlide >
         <router-view class="view-page" ></router-view>
-        <!-- <nuxt class="view-page" keep-alive/> -->
     </transitionSlide>
-    <!-- <nuxt class="view-page"   :nuxtChildKey="routerViewKey" /> -->
-    <!-- <my-footer/> -->
+
   </div>
 </template>
 
@@ -15,7 +13,7 @@
 let cachedTransition = 'slide-left'
 // import MyFooter from '~/components/Footer.vue'
 // import '~/assets/scss/global.scss'
-import transitionSlide from './components/transitionSlide'
+import transitionSlide from './components/transitionSlide.1'
 export default {
   key: (to) => to.fullPath,
   
@@ -33,6 +31,7 @@ export default {
       stateHistory: [],
       transitionName: 'slide-left',
       isBack: false,
+      firstTime: null
     }
   },
   created() {
@@ -120,6 +119,22 @@ export default {
     },
     onPlusReady () {
       document.addEventListener("netchange", this.onNetChange, false)
+      plus.webview.currentWebview().setStyle({
+          scrollIndicator: 'none',
+      });
+      plus.key.addEventListener('backbutton',() => {
+        this.goBack();
+        if(!this.firstTime) {
+          this.firstTime = new Date().getTime()
+          setTimeout(()=>{
+            this.firstTime = null
+          }, 500)
+        } else {
+          if (new Date().getTime() - this.firstTime < 1000) {
+            plus.runtime.quit()
+          }
+        }
+      },false);
     },
     onNetChange(){
       var nt = plus.networkinfo.getCurrentType();
@@ -161,9 +176,17 @@ export default {
 
 <style  lang="scss" >
   // @import "../assets/scss/global.scss";
-  
+::-webkit-scrollbar {/*隐藏滚轮*/
+display: none;
+width:0!important;
+visibility: hidden;
+}
+  .gpu {
+    -webkit-transform-style:preserve-3d;
+    transform: translate3d(0,0,0);    
+  }
   html,body {
-    height: 100%;
+    // height: 100%;
     /* font-size: 12px; */
     padding: 0;
     margin: 0;
@@ -191,7 +214,9 @@ export default {
 
   $color: #ff9900;
 
-  
+  a {
+    text-decoration: none;
+  }
   body {
     background: $color1;
   }

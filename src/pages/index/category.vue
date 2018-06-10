@@ -12,6 +12,7 @@
   import AxHeader from 'axui/components/ax-header'
   import Cateogry from '../../components/category/category'
   export default {
+    name: 'Category',
     components: {
       AxHeader,
       Cateogry

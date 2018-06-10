@@ -1,7 +1,7 @@
 <template>
-  <div class="ax-grid-list" :class="['ax-grid-list-'+showType]">
-    <div class="ax-grid-list-title">
-      标题
+  <div class="ax-grid-list" :class="['ax-grid-list-'+showType]" :style="{'backgroundColor':bgcolor}">
+    <div class="ax-grid-list-title" v-if="title">
+      {{title}}
     </div>
     <div class="ax-grid-list-body">
       <slot></slot>
@@ -15,11 +15,26 @@
 
     },
     props: {
+      columns: {
+        default: () => {
+          return '2'
+        }
+      },
+      bgcolor: {
+        default: () => {
+          return 'transparent'
+        }
+      },
       showType: {
         default: () => {
           return 'grid'
         }
-      }
+      },
+      title: {
+        default: () => {
+          return ''
+        }
+      },
     },
     data() {
       return {
@@ -49,8 +64,10 @@
     background-color: $ui_color_gray_bg;
     .ax-grid-list-title {
       padding: 15px 15px 9px;
-      font-size: 14px;
-      color: #888;
+      font-size: 30px;
+      color: #999;
+      font-weight: bold;
+      text-align: center;
     }
   }
   .ax-grid-list-title {
@@ -60,7 +77,9 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: flex-start;
+    background: $c_gridlist_body_bg;
+    padding: 20px 0;
   }
   
 </style>

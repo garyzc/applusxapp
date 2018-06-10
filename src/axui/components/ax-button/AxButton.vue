@@ -1,7 +1,7 @@
 <template>
-  <a class="ax-button" :class="['ax-button-type-'+type]">
+  <div class="ax-button" :class="['ax-button-type-'+type]">
     <span><slot></slot></span>
-  </a>
+  </div>
 </template>
 <script>
   export default {
@@ -72,7 +72,9 @@
     color: #000;
     display: inline-block;
     border-radius: 5px;
-
+    a {
+      color: #888888;
+    }
     &.ax-button-type-default {
       border: 1px solid #ddd;
       background-color: #fff;

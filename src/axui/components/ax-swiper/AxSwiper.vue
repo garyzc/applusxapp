@@ -1,5 +1,5 @@
 <template>
-  <div class="ax-swiper" v-touch-swipe="handTouchSwipe">
+  <div class="ax-swiper" >
     <div class="ax-swiper-wrapper">
       <slot></slot>
     </div>

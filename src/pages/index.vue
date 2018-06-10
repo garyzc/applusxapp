@@ -2,16 +2,18 @@
   <AxLayout>
 
     <AxLayoutPage>
-      <keep-alive>
-        <router-view class="view-page" :key="$route.fullPath" />
-      </keep-alive>
+      <transition>
+        <keep-alive>
+          <router-view class="view-page"  ></router-view>
+        </keep-alive>
+      </transition>
     </AxLayoutPage>
 
     <AxTabBar slot="bottom">
-        <AxTabBarPane title="首页" :to="{path:'/'}"></AxTabBarPane>
-        <AxTabBarPane title="分类" :to="{name:'categorylist'}"></AxTabBarPane>
-        <AxTabBarPane title="购物车" :to="{path:'cart'}"></AxTabBarPane>
-        <AxTabBarPane title="我的" :to="{path:'my'}"></AxTabBarPane>
+        <AxTabBarPane title="首页" :to="{name:'home'}" icon="icon-home_light"></AxTabBarPane>
+        <AxTabBarPane title="分类" :to="{name:'categorylist'}" icon="icon-cascades"></AxTabBarPane>
+        <AxTabBarPane title="购物车" :to="{path:'cart'}" icon="icon-cart_light"></AxTabBarPane>
+        <AxTabBarPane title="我的" :to="{path:'my'}" icon="icon-my_light"></AxTabBarPane>
     </AxTabBar>
     
   </AxLayout>

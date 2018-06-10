@@ -89,15 +89,17 @@
           justify-content: center;
           flex-direction: column;
           text-align: center;
+          align-items: center;
           .ax-grid-icon {
             width: 80px;
             height: 80px;
+            margin-bottom: 20px;
             img {
               width: 100%;
             }
           }
           .ax-grid-text {
-            color: #9fa0a2;
+            color: $ui_color_text_1;
             font-size: 26px;
           }
         }

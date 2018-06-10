@@ -20,20 +20,27 @@
         stateHistory: [],
         transitionName: 'slide-left',
         isBack: false,
+        cw: 0,
       }
     },
     methods: {
+      getWidth() {
+        return document.body.clientWidth
+      },
       beforeEnter(el) {
+        this.cw = document.body.clientWidth
         if(this.transitionName == 'slide-left') {
-          el.style.transform = 'translateX(100%)'
+          // el.style.transform = 'translateX(100%)'
+          el.style.left = this.cw+'px'
         } else {
-          el.style.transform = 'translateX(-100%)'
+          // el.style.transform = 'translateX(-100%)'
+          el.style.left = -this.cw+'px'
         }
       },
       enter(el, done) {
         anime({
             targets: el,
-            translateX: 0,
+            left: 0,
             duration: 400,
             easing: [.55,0,.1,1],
             complete: function(anim) {
@@ -44,25 +51,21 @@
         
       },
       beforeLeave(el) {
-        el.style.transform = 'translateX(0)'
+        // el.style.transform = 'translateX(0)'
+        el.style.left = '0px'
       },
       leave(el, done) {
-        let translateX = '100%'
+        let translateX = this.cw
         if(this.transitionName == 'slide-left') {
-          translateX = '-100%'
+          translateX = -this.cw
         }
         anime({
             targets: el,
-            translateX: translateX,
+            left: translateX,
             duration: 400,
             easing: [.55,0,.1,1],
             complete: function(anim) {
-                done()
-                // el.style = ""
-                setTimeout(function(){
-                    
-                }.bind(this),400)
-                
+                done()               
             }
         });
       },

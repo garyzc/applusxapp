@@ -1,7 +1,8 @@
 <template>
-  <div class="ax-tabbar-tab">
-    <router-link :to="to">
+  <div class="ax-tabbar-pane">
+    <router-link :to="to" class="ax-tabbar-pane-link">
       <div class="ax-tabbar-icon">
+        <AxIcon :type="icon" />
         <span class="ax-tabbar-badge">
           <div></div>
           <sup></sup>
@@ -19,6 +20,11 @@
     },
     props: {
       title: {
+        default:()=>{
+          return ''
+        }
+      },
+      icon: {
         default:()=>{
           return ''
         }
@@ -53,7 +59,7 @@
 </script>
 
 <style lang="scss">
-  .ax-tabbar-tab {
+  .ax-tabbar-pane {
     flex: 1;
     display: inline-flex;
     align-items: center;
@@ -61,5 +67,16 @@
   }
   .ax-tabbar-title {
     font-size: 22px;
+  }
+  .ax-tabbar-pane-link {
+    color: $c_tabbar_color_default;
+    text-decoration: none;
+    text-align: center;
+    .ax-icon {
+      font-size: 50px;
+    }
+    &.router-link-active {
+      color: $c_tabbar_color_selected;
+    }
   }
 </style>

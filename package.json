@@ -11,7 +11,7 @@
     "e2e": "node test/e2e/runner.js",
     "test": "npm run unit && npm run e2e",
     "build": "node build/build.js",
-    "mock": "nodemon --watch mock --exec \"json-server --watch mock/faker-data.js --host 172.101.106.2 --port 3004\"",
+    "mock": "nodemon --watch mock --exec \"json-server --watch mock/faker-data.js --host localhost --port 3004\"",
     "mockdev": "npm run mock |  npm run dev"
   },
   "dependencies": {

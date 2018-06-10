@@ -1,3 +1,3 @@
-import AxGrid from './AxGrid'
+import AxFlex from './AxFlex'
 
-export default AxGrid
+export default AxFlex

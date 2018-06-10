@@ -45,6 +45,7 @@ module.exports = function () {
     return {
         search: wrapRequest(_.times(100, function (n) {
             return {
+                id: n+1,
                 img: mock_products[n%8],
                 text: mock_titles[n%8],
                 avatar: faker.internet.avatar()

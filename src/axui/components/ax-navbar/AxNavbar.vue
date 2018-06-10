@@ -81,12 +81,13 @@
     // background: $skeleton_color_bg;
     width: 100%;
     height: $ax_navbar_height;
-    padding: 10px 0;
+    // padding: 10px 0;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-around;
-    box-sizing: border-box;
+    // box-sizing: border-box;
+    padding-top: 45px;
     .ax-icon {
       color: #333;
     }

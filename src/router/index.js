@@ -4,17 +4,23 @@ import HelloWorld from '@/components/HelloWorld'
 
 Vue.use(Router)
 
+import Index from '../pages/index.vue'
+import Search from '../pages/search.vue'
+
 
 const index = {
   path: '/',
   name: 'index',
-  component:  (resolve) => { require(['../pages/index.vue'], resolve)},
+  redirect: 'home',
+//   component:  (resolve) => { require(['../pages/index.vue'], resolve)},
+  component: Index,
   meta: { title:'首页' },
   children: [
       {
-          path: '',
-          component:  (resolve) => { require(['../pages/index/index.vue'], resolve)},
-          meta: { title:'首页' },
+          path: 'home',
+          name: 'home',
+          component:  (resolve) => { require(['../pages/index/home.vue'], resolve)},
+          meta: { title:'首页', savepos:true },
       },
       {
           path: 'category/:id?',
@@ -48,7 +54,8 @@ const index = {
 const search = {
   path: '/search',
   name: 'search',
-  component:  (resolve) => { require(['../pages/search.vue'], resolve)},
+//   component:  (resolve) => { require(['../pages/search.vue'], resolve)},
+  component:  Search,
   meta: { title:'搜索' },
 }
 const product = {
@@ -65,9 +72,41 @@ const routes = [
 
 ]
 
-
-export default new Router({
-  mode: 'hash',
-  base: __dirname,
-  routes
+const newrouter = new Router({
+    mode: 'hash',
+    base: __dirname,
+    routes,
+    scrollBehavior (to, from, savedPosition) {
+        console.log(to.meta)
+        if (savedPosition) {
+            // savedPosition is only available for popstate navigations.
+            return savedPosition
+        } else {
+            const position = {}
+            // new navigation.
+            // scroll to anchor by returning the selector
+            if (to.hash) {
+                position.selector = to.hash
+            }
+            // check if any matched route config has meta that requires scrolling to top
+            if (to.matched.some(m => m.meta.scrollToTop)) {
+                // cords will be used if no selector is provided,
+                // or if the selector didn't match any element.
+                position.x = 0
+                position.y = 0
+            }
+            // if the returned position is falsy or an empty object,
+            // will retain current scroll position.
+            return position
+        }
+    }
 })
+
+newrouter.beforeEach((to, from, next) => {
+    if(from.meta.savepos) {
+        from.meta.x = 10
+    }
+    next()
+})
+
+export default newrouter

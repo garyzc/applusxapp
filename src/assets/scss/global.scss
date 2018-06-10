@@ -19,6 +19,15 @@ $ui_color_white: #ffffff;
 $ui_color_gray: #7c7c7c;
 $ui_color_gray_bg: #f0f2f4;
 
+$ui_color_text_0: #424242;
+$ui_color_text_1: #8d8d8d;
+
+$secondary_color_gray:#f2f2f2;
+
+$c_tabbar_color_default: $ui_color_text_0;
+$c_tabbar_color_selected: #fd5d01;
+$c_gridlist_body_bg: $secondary_color_gray;
+
 /**
 * components
 */
@@ -28,7 +37,7 @@ $ax_navbar_height: 100px;
 /**
 *骨架
 */
-$skeleton_color_bg: #efefef;
+$skeleton_color_bg: #fafafa;
 
 
   // .page-enter-active, .page-leave-active

@@ -1,8 +1,8 @@
 <template>
-  <div class="ax-layout">
+  <div class="ax-layout" :style="{backgroundColor: bgc}">
     <slot></slot>
 
-    <div class="ax-layout-bottom">
+    <div class="ax-layout-bottom ax-sync-fixed">
       <slot name="bottom" >
 
       </slot>
@@ -13,6 +13,13 @@
 <script>
   export default {
     name: 'AxLayout',
+    props: {
+      bgc: {
+        default: () => {
+          return 'transparent'
+        }
+      },
+    },
     async fetch  (context) {
 
     },
@@ -49,9 +56,13 @@
     // overflow: hidden;
     // flex-direction: column
     .ax-layout-bottom {
+      // position: sticky;
+      // position: -webkit-sticky;
       position: fixed;
       bottom:0;
       width: 100%;
+      transform: translateZ(0);
+      -webkit-transform: translateZ(0);
     }
   }
 </style>
