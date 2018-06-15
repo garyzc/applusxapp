@@ -1,5 +1,5 @@
 <template>
-  <div class="ax-button" :class="['ax-button-type-'+type]">
+  <div class="ax-button" :class="['ax-button-type-'+type,'ax-button-size-'+type,{'ax-button-fit':fit != null}]">
     <span><slot></slot></span>
   </div>
 </template>
@@ -15,15 +15,13 @@
           return 'default'
         }
       },
-      wrap: {
+      size: {
         default: () => {
-          return 'nowrap'
+          return 'small'
         }
       },
-      justify: {
-        default: () => {
-          return 'flex-start'
-        }
+      fit: {
+        default: null
       },
       align: {
         default: () => {
@@ -70,8 +68,16 @@
     word-break: break-word;
     white-space: nowrap;
     color: #000;
-    display: inline-block;
+    display: inline-flex;
     border-radius: 5px;
+    align-items: center;
+    justify-content: center;
+    height: 80px;
+    padding: 0 20px;
+    &.ax-button-fit {
+      width: 100%;
+      height: 100%;
+    }
     a {
       color: #888888;
     }
@@ -82,6 +88,14 @@
     &.ax-button-type-text {
 
     }
+    &.ax-button-type-primary {
+      background-color: $Primary;
+      color: $White;
+    }
+    &.ax-button-size-small {
+
+    }
+
   }
   
   

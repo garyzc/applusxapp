@@ -12,8 +12,8 @@
     <AxTabBar slot="bottom">
         <AxTabBarPane title="首页" :to="{name:'home'}" icon="icon-home_light"></AxTabBarPane>
         <AxTabBarPane title="分类" :to="{name:'categorylist'}" icon="icon-cascades"></AxTabBarPane>
-        <AxTabBarPane title="购物车" :to="{path:'cart'}" icon="icon-cart_light"></AxTabBarPane>
-        <AxTabBarPane title="我的" :to="{path:'my'}" icon="icon-my_light"></AxTabBarPane>
+        <AxTabBarPane title="购物车" :to="{name:'cart'}" icon="icon-cart_light"></AxTabBarPane>
+        <AxTabBarPane title="我的" :to="{name:'user'}" icon="icon-my_light"></AxTabBarPane>
     </AxTabBar>
     
   </AxLayout>

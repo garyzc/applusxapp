@@ -67,6 +67,7 @@
 <style lang="scss" >
 
   .ax-card {
+    width: 100%;
     background-color: #fff;
     &.ax-card-radius-small {
       border-radius: 10px;

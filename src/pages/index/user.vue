@@ -1,8 +1,14 @@
 <template>
   <AxLayout bgc="#f2f2f2">
 
-    <AxFlex pl="big" pr="big">
-      <AxCard radius="small">
+    <userInfoBar>
+
+    </userInfoBar>
+    
+    
+
+    <AxFlex pl="big" pr="big" :style="{marginTop: '-20px'}">
+      <AxCard radius="small" :style="{flex:1}">
         adsf
       </AxCard>
     </AxFlex>
@@ -13,7 +19,7 @@
       <AxCard radius="small">
         <div slot="hl">我的订单</div>
         <AxButton type="text" slot="hr">
-          <router-link :to="{name:'home'}">查看更多订单<AxIcon type="icon-back_light" /></router-link>
+          <router-link :to="{name:'home'}">查看更多订单<AxIcon type="icon-right" /></router-link>
         </AxButton>
 
         <AxGrid :data="GridList" colnums="5" />
@@ -30,12 +36,14 @@
   // import AxSwiper from 'axui/components/ax-swiper'
   // import AxGrid from 'axui/components/ax-grid'
   // import AxFlex from 'axui/components/ax-flex'
+  import userInfoBar from 'coms/user/userInfoBar'
   import importWrap from 'util/importWrap'
-  const components = importWrap(['AxLayout','AxHeader','AxCard','AxFlex','AxSpace','AxButton','AxGrid'])
+  const components = importWrap(['AxLayout','AxHeader','AxCard','AxFlex','AxSpace','AxButton','AxGrid','AxAvatar','AxText'])
   export default {
     components: {
       // AxLayout
-      ...components
+      ...components,
+      userInfoBar
     },
     async fetch  (context) {
 
@@ -69,6 +77,9 @@
   }
 </script>
 
-<style >
-
+<style lang="scss">
+  .my-action-list {
+    color: #fff;
+    padding: 20px 0;
+  }
 </style>

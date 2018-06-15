@@ -30,6 +30,7 @@ module.exports = {
       'axui': resolve('src/axui'),
       'util': resolve('src/util'),
       'mixins': resolve('src/mixins'),
+      'coms': resolve('src/components'),
     }
   },
   module: {

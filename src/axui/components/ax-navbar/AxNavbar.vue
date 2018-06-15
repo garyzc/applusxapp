@@ -1,5 +1,5 @@
 <template>
-  <div class="ax-navbar " :class="{'ax-header-fixed': fixed,'ax-navbar-inverse':inverse,'ax-navbar-light':theme=='light'}" :style="styles">
+  <div class="ax-navbar " :class="classComputed" :style="styles">
     <div class="ax-navbar-left">
       <slot name="left"></slot>
       <!-- <div class="ax-header-btn-icon"></div>
@@ -26,7 +26,7 @@
       },
       theme: {
         default:() => {
-          return 'light'
+          return 'primary'
         }
       },
       fixed: {
@@ -36,7 +36,7 @@
       },
       inverse: {
         default:() => {
-          return false
+          return null
         }
       }
     },
@@ -65,7 +65,13 @@
       }
     },
     computed: {
-      
+      classComputed:function(){
+        return [
+          {'ax-header-fixed': this.fixed},
+          {'ax-navbar-inverse': this.inverse!=null},
+          'ax-navbar-'+ this.theme
+        ]
+      }
     },
     methods: {
       handlerSearchCLick() {
@@ -87,7 +93,7 @@
     align-items: center;
     justify-content: space-around;
     // box-sizing: border-box;
-    padding-top: 45px;
+    padding-top: $ax_navbar_top_height;
     .ax-icon {
       color: #333;
     }
@@ -141,13 +147,20 @@
   }
   .ax-navbar-inverse {
     .ax-icon {
-      color: #fff;
+      color: #fff!important;
     }
     .ax-button {
-      color: #fff;
+      color: #fff!important;
     }
   }
   .ax-navbar-light {
+    
+  }
+  .ax-navbar-primary {
+    background-color: $Primary;
+    .ax-navbar-mid {
+      color: $White;
+    }
     
   }
 </style>

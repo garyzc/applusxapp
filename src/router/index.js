@@ -43,9 +43,9 @@ const index = {
           meta: { title:'首页' },
       },
       {
-          path: 'my',
-          name: 'my',
-          component:  (resolve) => { require(['../pages/index/my.vue'], resolve)},
+          path: 'user',
+          name: 'user',
+          component:  (resolve) => { require(['../pages/index/user.vue'], resolve)},
           meta: { title:'首页' },
       }
   ]
@@ -64,11 +64,25 @@ const product = {
   component:  (resolve) => { require(['../pages/product.vue'], resolve)},
   meta: { title:'商品' },
 }
+const setting = {
+  path: '/setting',
+  name: 'setting',
+  component:  (resolve) => { require(['../pages/setting.vue'], resolve)},
+  meta: { title:'设置' },
+}
+const profile = {
+  path: '/profile',
+  name: 'profile',
+  component:  (resolve) => { require(['../pages/profile.vue'], resolve)},
+  meta: { title:'个人信息' },
+}
 
 const routes = [
   index,
   search,
-  product
+  product,
+  setting,
+  profile,
 
 ]
 

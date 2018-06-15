@@ -1,6 +1,8 @@
 <template>
   <div>
-    <AxHeader v-on:searchClick="$router.push({path:'/search'})" inverse="true"></AxHeader>
+    <AxNavbar inverse>
+      
+    </AxNavbar>
     <Cateogry>
       <router-view></router-view>
     </Cateogry>
@@ -10,11 +12,13 @@
 
 <script>
   import AxHeader from 'axui/components/ax-header'
+  import AxNavbar from 'axui/components/ax-navbar'
   import Cateogry from '../../components/category/category'
   export default {
     name: 'Category',
     components: {
       AxHeader,
+      AxNavbar,
       Cateogry
     },
     async fetch  (context) {

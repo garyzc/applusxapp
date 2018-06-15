@@ -21,29 +21,6 @@ export const actions = {
     commit('setList',data)
   },
 
-  // async init({commit,state }, context) {
-  //   let {store,page,node} = context
-  //   await store.dispatch('list001/fetchList',{page,node})
-  // },
-
-  // async fetchList ({commit,state }, {page,node}) {
-  //   let {page_lan} = page
-  //   let parent_id = page.id
-  //   if(node.cdata.data.content.parent == 'parent') {
-  //     parent_id = page.page_parent
-  //   }
-
-  //   let {data} = await apiUtil.get('/page/articles',{params:
-  //     {
-  //       lan: page_lan,
-  //       parent_id: parent_id
-  //     }
-  //   })
-
-  //   commit('setLlist',data)
-
-  // }
-
 }
 
 export const mutations = {

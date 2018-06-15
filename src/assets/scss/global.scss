@@ -14,6 +14,47 @@ $color1: #ffffff;
 /**
 *UI
 */
+
+// red
+$ui_color_red: #f04134;
+$Red-1: lighten($ui_color_red,9*5);
+$Red-2: lighten($ui_color_red,9*4);
+$Red-3: lighten($ui_color_red,9*3);
+$Red-4: lighten($ui_color_red,9*2);
+$Red-5: lighten($ui_color_red,9*1);
+$Red-6: lighten($ui_color_red,9*0);
+$Red-7: darken($ui_color_red,9*1);
+$Red-8: darken($ui_color_red,9*2);
+$Red-9: darken($ui_color_red,9*3);
+$Red-10: darken($ui_color_red,9*4);
+// lighten(#f04134,0)
+
+$ui_color_gray: #bfbfbf;
+$Gray-1: lighten($ui_color_gray,9*5);
+$Gray-2: lighten($ui_color_gray,9*4);
+$Gray-3: lighten($ui_color_gray,9*3);
+$Gray-4: lighten($ui_color_gray,9*2);
+$Gray-5: lighten($ui_color_gray,9*1);
+$Gray-6: lighten($ui_color_gray,9*0);
+$Gray-7: darken($ui_color_gray,9*1);
+$Gray-8: darken($ui_color_gray,9*2);
+$Gray-9: darken($ui_color_gray,9*3);
+$Gray-10: darken($ui_color_gray,9*4);
+
+
+$Primary: $Red-6;
+
+
+$White: #ffffff;
+$Black: #000000;
+
+$FontTitle: rgba($Black,0.75);
+$FontBody: rgba($Black,0.65);
+$FontCaption: rgba($Black,0.43);
+$FontDisable: rgba($Black,0.25);
+$FontLink: rgba($Black,0.25);
+
+
 $ui_color_black: #333333;
 $ui_color_white: #ffffff;
 $ui_color_gray: #7c7c7c;
@@ -33,6 +74,11 @@ $c_gridlist_body_bg: $secondary_color_gray;
 */
 $ax_tabs_height: 104px;
 $ax_navbar_height: 100px;
+$ax_navbar_top_height: 45px;
+
+$ax_layout_bottom_height: 104px;
+$ax_layout_bottom2_height: 208px;
+$ax_layout_top_height: $ax_navbar_height + $ax_navbar_top_height;
 
 /**
 *骨架

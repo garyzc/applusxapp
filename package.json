@@ -11,7 +11,8 @@
     "e2e": "node test/e2e/runner.js",
     "test": "npm run unit && npm run e2e",
     "build": "node build/build.js",
-    "mock": "nodemon --watch mock --exec \"json-server --watch mock/faker-data.js --host localhost --port 3004\"",
+    "mock__": "nodemon --watch mock --exec \"json-server --watch mock/faker-data.js --middlewares mock/response-wrap.js  --host localhost --port 3004\"",
+    "mock": "nodemon --watch mock --exec \"node jsonserver.js\"",
     "mockdev": "npm run mock |  npm run dev"
   },
   "dependencies": {
@@ -19,7 +20,8 @@
     "axios": "^0.18.0",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1",
-    "vuex": "^3.0.1"
+    "vuex": "^3.0.1",
+    "vuex-map-fields": "^1.2.3"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",

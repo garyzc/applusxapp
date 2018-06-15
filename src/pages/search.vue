@@ -1,6 +1,6 @@
 <template>
     <AxLayout class="page-search">
-      <AxNavbar :style="{backgroundColor: '#ff4b32'}" :inverse="true">
+      <AxNavbar :style="{backgroundColor: '#ff4b32'}" inverse>
         <AxIcon slot="left" type="icon-back_light" @click.native="goBack" />
         <AxInput :radius="true" icon="icon-search_light" />
         <AxButton slot="right" type="text" @click.native="handleSearch" v-show="navRight == 'search'">搜索</AxButton>

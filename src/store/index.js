@@ -5,7 +5,9 @@ import createLogger from 'vuex/dist/logger'
 
 import actions from './actions'
 import mutations from './mutations'
+
 import search from './modules/search'
+import cart from './modules/cart'
 
 Vue.use(Vuex)
 
@@ -15,7 +17,8 @@ export default new Vuex.Store({
   actions,
   mutations,
   modules: {
-    search
+    search,
+    cart,
   },
   strict: debug,
   plugins: debug ? [createLogger()] : []

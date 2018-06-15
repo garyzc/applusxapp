@@ -1,5 +1,5 @@
 <template>
-  <div class="ax-flex" :class="cstyle">
+  <div class="ax-flex" :class="cstyle" :style="{backgroundColor:bgc}">
     <slot></slot>
   </div>
 </template>
@@ -10,6 +10,11 @@
 
     },
     props: {
+      flex: {
+        default: () => {
+          return true
+        }
+      },
       pt: {
         default: () => {
           return ['normal']
@@ -42,12 +47,22 @@
       },
       justify: {
         default: () => {
-          return 'flex-start'
+          return 'start'
         }
       },
       align: {
         default: () => {
-          return 'flex-start'
+          return 'start'
+        }
+      },
+      bgc: {
+        default: () => {
+          return 'transparent'
+        }
+      },
+      fit: {
+        default: () => {
+          return true
         }
       },
     },
@@ -69,10 +84,13 @@
       cstyle:function(){
 
         return [
+          {'ax-flex-flex':this.flex},
           'ax-flex-pt-'+this.pt,
           'ax-flex-pb-'+this.pb,
           'ax-flex-pl-'+this.pl,
           'ax-flex-pr-'+this.pr,
+          'ax-justify-'+this.justify,
+          {'ax-flex-fit':this.fit}
           ]
       }
     },
@@ -85,6 +103,13 @@
 <style lang="scss" >
 
   .ax-flex {
+    box-sizing: border-box;
+    &.ax-flex-flex {
+      display: flex;
+    }
+    &.ax-flex-fit {
+      width: 100%;
+    }
     .ax-flex-small {
       padding: 10px 0;
     }
@@ -126,6 +151,13 @@
     &.ax-flex-pr-lg {
       padding-right: 30px;
     }
+  }
+
+  .ax-justify-between {
+    justify-content: space-between;
+  }
+  .ax-justify-around {
+    justify-content: space-around;
   }
   
   

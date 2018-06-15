@@ -33,16 +33,24 @@ const mock_titles = [
     '机械师游戏本（MACHENIKE） F117-B八代i7/GTX1050Ti全面屏轻薄吃鸡',
 ]
 const wrapRequest = (datas) => {
-    return  {
-        code: 0,
-        data: datas
-    }
+    return  datas
 }
 module.exports = function () {
     var faker = require("faker");
     faker.locale = "zh_CN";
     var _ = require("lodash");
     return {
+        cart: wrapRequest(_.times(5, function (n) {
+            return {
+                id: n+1,
+                img: mock_products[n%8],
+                text: mock_titles[n%8],
+                avatar: faker.internet.avatar(),
+                checked: false,
+                price: 100,
+                ordernum: 1
+            }
+        })),
         search: wrapRequest(_.times(100, function (n) {
             return {
                 id: n+1,

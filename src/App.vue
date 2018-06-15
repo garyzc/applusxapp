@@ -211,6 +211,14 @@ visibility: hidden;
     margin: 0;
     list-style: none;
   }
+  input[type="checkbox"] {
+    margin: 0;
+    padding: 0;
+    outline: none;
+  }
+  * {
+    -webkit-tap-highlight-color: transparent;
+}
 
   $color: #ff9900;
 
@@ -237,6 +245,10 @@ visibility: hidden;
   }
   .title {
     font-size: pxTorem(20);
+  }
+
+  .ax-ui-bg-gray {
+    background-color: $secondary_color_gray;
   }
   
 </style>
