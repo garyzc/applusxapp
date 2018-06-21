@@ -15,6 +15,7 @@
           return true
         }
       },
+   
       pt: {
         default: () => {
           return ['normal']
@@ -90,6 +91,7 @@
           'ax-flex-pl-'+this.pl,
           'ax-flex-pr-'+this.pr,
           'ax-justify-'+this.justify,
+          'ax-align-'+this.align,
           {'ax-flex-fit':this.fit}
           ]
       }
@@ -109,6 +111,7 @@
     }
     &.ax-flex-fit {
       width: 100%;
+      height: 100%;
     }
     .ax-flex-small {
       padding: 10px 0;
@@ -158,6 +161,9 @@
   }
   .ax-justify-around {
     justify-content: space-around;
+  }
+  .ax-align-center {
+    align-items: center;
   }
   
   

@@ -4,33 +4,33 @@
       购物车
     </AxNavbar>
 
-    <AxGridList showType="col">
+    <!-- <AxGridList showType="col">
         <AxGridListItem v-for="(item,index) in $store.state.cart.list" :key="index" :data="item" :to="{name:'product'}" check >
-          <AxCheckbox :checked="item.checked" @change="(checked)=>{ updateOrderItemChecked(index,checked) }"  slot="check" />
-            <AxFlex slot="bottom" justify="between">
-              <em>¥</em>{{item.price}}
-              <AxInputnumber :value="item.ordernum" :min="1" @change="(value) => {updateOrderItemNum(index,value)}" />
-            </AxFlex>
+          <AxCheckbox :checked="item.checked" @change="(checked)=>{ $store.dispatch('cart/updateCheck',{index,checked}) }"  slot="check" />
+          <AxFlex slot="bottom" justify="between">
+            <em>¥</em>{{item.price}}
+            <AxInputnumber :value="item.ordernum" :min="1" @change="(value) => {$store.dispatch('cart/updateOrderItemNum',{index,value})}" />
+          </AxFlex>
+          <img :src="item.product.image" slot="img" />
+          <template slot="title">{{item.product.name}}</template>
         </AxGridListItem>
-    </AxGridList>
+        
+    </AxGridList> -->
 
-    <div slot="bottom2" class="cart-bottom">
-      <AxCheckbox :checked="listIsCheckedAll" @change="updateCheckAll">全选</AxCheckbox>
-      <div v-if="cartTotal">
-        合计¥{{cartTotal}}
+    <CartList :data="$store.state.cart.list"></CartList>
+
+    <div slot="bottom1" class="cart-bottom">
+      <AxCheckbox :checked="$store.getters['cart/isCheckAll']" @change="(checked) => { $store.dispatch('cart/checkAll',checked) }">全选</AxCheckbox>
+      <div v-if="$store.getters['cart/total']">
+        合计¥{{$store.getters['cart/total']}}
       </div>
-      <AxButton type="primary">结算({{listCheckedNumbers}})</AxButton>
+      <AxButton type="primary" @click.native="checkOut">结算({{$store.getters['cart/checkeds']}})</AxButton>
     </div>
+    <div class="page-index-bottom" slot="bottom"></div>
   </AxLayout>
 </template>
 
 <script>
-  import { mapMultiRowFields    } from 'vuex-map-fields';
-
-  const mapMulFileds = (that) => {
-    console.log(that)
-  }
-
   import importWrap from 'util/importWrap'
   const components = importWrap([
     'AxLayout',
@@ -47,9 +47,11 @@
     'AxCheckbox',
     'AxInputnumber',
     ])
+  import CartList from 'coms/cart/CartList.vue'
   export default {
     components: {
-      ...components
+      ...components,
+      CartList
     },
     async fetch  (context) {
 
@@ -69,59 +71,27 @@
       }
     },
     watch: {
-      '$store.state.cart.list': {
-        handler(newValue, oldValue) {
-          console.log(this.$store)
-          // this.$store.commit('cart/setList',{data:newValue})
-        },
-        deep:true
-      }
-    },
-    computed: {
-      listIsCheckedAll: function() {
-        return this.listCheckedNumbers == this.$store.state.cart.list.length
-      },
-      listCheckedNumbers: function() {
-        let checkeList = this.$store.state.cart.list.filter((item)=>{
-          return item.checked == true
-        })
-        return checkeList?checkeList.length:0
-      },
-      cartTotal: function() {
-        return this.$store.state.cart.list.reduce((value,item)=>{
-          if(item.checked) {
-            return item.price*item.ordernum + value
-          } else {
-            return value
-          }
-        },0)
-      }
       
+    },
+    computed: {      
+
     },
     methods: {
       fetchData () {
         this.$store.dispatch('cart/query', {})
       },
-      updateCheckAll (checked) {
-        this.$store.commit('cart/updateCheckAll', checked)
-      },
-      updateOrderItemChecked(index,checked) {
-        this.$store.commit('cart/updateOrderItemChecked', {
-          index,
-          checked
-        })
-      },
-      updateOrderItemNum(index,value) {
-        this.$store.commit('cart/updateOrderItemChecked', {
-          index,
-          checked:true
-        })
 
-        this.$store.commit('cart/updateOrderItemNum',{
-          index,
-          value
-        })
+      checkOut () {
+        if( this.$store.getters['cart/checkeds'] == 0 ) {
+          this.$axtoast({
+            text:'您还没有选择商品^_^'
+          })
+        } else {
+          this.$router.push({name:'checkout'})
+        }
+        
       }
+      
     }
 
   }
@@ -130,11 +100,11 @@
 <style lang="scss">
   .cart-bottom {
     background-color: #fff;
-    height: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 0 20px 0 40px;
+    height: $ax_layout_bottom1_height;
     box-sizing: border-box;
   }
 </style>

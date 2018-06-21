@@ -1,5 +1,5 @@
 <template>
-  <div class="ax-swiper-item" v-bind:style="bgStyle">
+  <div class="ax-swiper-item" v-bind:style="bgStyle" :class="cls">
     <slot></slot>
   </div>
 </template>
@@ -32,6 +32,11 @@
         return {
           'background-image': 'url('+ this.bgimg +')'
         }
+      },
+      cls: function() {
+        return [
+          {'ax-swiper-item-fit-parent': this.$parent.fitParent}
+        ]
       }
     },
     methods: {
@@ -50,5 +55,7 @@
     background-position: top center;
     background-size: cover;
   }
-
+  .ax-swiper-item-fit-parent {
+    overflow-y: auto;
+  }
 </style>

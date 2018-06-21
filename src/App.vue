@@ -250,5 +250,15 @@ visibility: hidden;
   .ax-ui-bg-gray {
     background-color: $secondary_color_gray;
   }
+
+  .ax-touch {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    user-drag: none;
+    -khtml-user-drag: none;
+    -webkit-user-drag: none;
+  }
   
 </style>

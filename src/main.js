@@ -9,6 +9,9 @@ import store from './store'
 import AxIcon from './axui/components/ax-icon'
 Vue.component('AxIcon', AxIcon)
 
+import AxToast from './axui/components/ax-toast'
+Vue.use(AxToast)
+
 Vue.use(Vuex)
 
 Vue.mixin({

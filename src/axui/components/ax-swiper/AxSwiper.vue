@@ -12,6 +12,12 @@
   export default {
     name: 'AxSwiper',
     props: {
+      fitParent: {
+        default: false
+      },
+      value: {
+        default: 0
+      },
       loop: {
         default: () => {
           return false
@@ -30,6 +36,7 @@
     },
     data() {
       return {
+        disabled: true,
     　　startPos: {},
         endPos: {},
         isScrolling: 0,
@@ -51,8 +58,15 @@
       this.wrapper.style.width = document.body.clientWidth + 'px'
       let swiperItems = root.querySelectorAll('.ax-swiper-item')
       this.totals = swiperItems.length
+      
       for(let i=0; i<swiperItems.length; i++) {
+        // if(this.fitParent == true) {
+        //   swiperItems[i].style.height=spjs(this.$el).parent().height()
+        // }
         swiperItems[i].style.width = document.body.clientWidth + 'px'
+      }
+      if(this.fitParent == true) {
+        spjs(this.$el).find('.ax-swiper-item').height( (spjs(window).height() - spjs('.ax-layout-top').height() - spjs('.ax-layout-top1').height() ) + 'px')
       }
       if(this.loop === true && swiperItems.length > 1) {
         let firstClone = swiperItems[0].cloneNode(true)
@@ -62,6 +76,8 @@
         this.wrapper.style.transform = 'translateX('+ -document.body.clientWidth + 'px)'
         this.currentIndex = 1
         this.totals = this.totals + 2
+      } else {
+        this.currentIndex = 0
       }
       
       this.startAutoPlay()
@@ -72,6 +88,11 @@
     },
     computed: {
       
+    },
+    watch: {
+      value: function(val){
+        this.moveTo(val)
+      }
     },
     methods: {
       handTouchSwipe() {
@@ -84,6 +105,9 @@
             this.moveNext()
           },this.autoplayduration)
         }
+      },
+      onChange() {
+        this.$emit('change',this.currentIndex)
       },
       clearAutoPlay() {
         if(this.autoplayInterval != '') {
@@ -112,6 +136,8 @@
 
         this.$el.addEventListener('touchmove',this.touchMove,false)
     　　this.$el.addEventListener('touchend',this.touchEnd,false)
+
+        this.disabled = true
       },
       movePrev() {
         if(this.loop == false) {
@@ -121,13 +147,14 @@
 
             this.animeInstance = anime({
               targets: this.wrapper,
-              translateX: document.body.clientWidth*(-this.currentIndex-1),
+              translateX: document.body.clientWidth*(-(this.currentIndex-1)),
               duration: 400,
               easing: [.55,0,.1,1],
               complete: (anim) => {
                 this.currentIndex = this.currentIndex - 1
 
                 this.startAutoPlay()
+                this.onChange()
 
               }
             })
@@ -151,11 +178,28 @@
               }
               
               this.startAutoPlay()
+              this.onChange()
               
             }
           })
           
         }
+      },
+      moveTo(index) {
+        this.animeInstance = anime({
+          targets: this.wrapper,
+          translateX: -document.body.clientWidth*(index),
+          duration: 400,
+          easing: [.55,0,.1,1],
+          complete: (anim) => {
+            this.currentIndex = index
+
+            this.startAutoPlay()
+
+            this.onChange()
+
+          }
+        })
       },
       moveNext() {
         if(this.loop == false) {
@@ -172,6 +216,8 @@
                 this.currentIndex = this.currentIndex + 1
 
                 this.startAutoPlay()
+
+                this.onChange()
 
               }
             })
@@ -194,7 +240,7 @@
               }
 
               this.startAutoPlay()
-              
+              this.onChange()
               
             }
           })
@@ -209,9 +255,32 @@
         
       },
       touchMove(event) {
+
+        
         //当屏幕有多个touch或者页面被缩放过，就不执行move操作
         if(event.targetTouches.length > 1 || event.scale && event.scale !== 1) return;
+
+
+        let e = event.changedTouches ? event.changedTouches[0] : event
+        if(this.disabled) {
+          setTimeout(()=>{
+            let dir = this.getSlideDirection(this.startPos.x,this.startPos.y,e.pageX,e.pageY)
+            if(  dir == 3 || dir == 4 ) {
+              this.disabled = false
+            } else {
+              this.$el.removeEventListener('touchmove',this.touchMove,false);
+              this.$el.removeEventListener('touchend',this.touchEnd,false);
+            }
+          },50)
+        }
+
+
+        if(this.disabled) return false
         var touch = event.targetTouches[0];
+
+        
+
+        
         this.endPos = {x:touch.pageX - this.startPos.x,y:touch.pageY - this.startPos.y};
 
         // this.wrapper.style.css.transform = 'translateX('+ -document.body.clientWidth + 'px)'
@@ -232,22 +301,34 @@
         }
       },
       touchEnd(event) {
-        
+        if(this.disabled) return 
+
         var duration = +new Date - this.startPos.time; //滑动的持续时间
         if(this.isScrolling === 0){ //当为水平滚动时
           if(Number(duration) > 10 && Math.abs(this.startPos.x-this.endPos.x) > 10){
-            console.log('ddd'+new Date())
+            // console.log('ddd'+new Date())
             //判断是左移还是右移，当偏移量大于10时执行
             let bili = (document.body.clientWidth - Math.abs(this.startPos.x-this.endPos.x))/2 - 50
             if(this.endPos.x > bili){
               console.log('右')
-              this.movePrev()
+              if(this.loop == false && this.currentIndex == 0 ){
+                this.resetTouchMoveDistance()
+              } else {
+                this.movePrev()
+                console.log('mn')
+              }
+              
               
               
             }else if(this.endPos.x <= -bili){
               console.log('左')
+              if(this.loop == false && this.currentIndex+1 == this.totals ){
+                this.resetTouchMoveDistance()
+              } else {
+                this.moveNext()
+                
+              }
               
-              this.moveNext()
               
               
             } else {
@@ -260,11 +341,13 @@
             
           }
         }
+        this.disabled = true
     　　//解绑事件
         this.startPos = {}
         this.endPos = {}
         this.$el.removeEventListener('touchmove',this.touchMove,false);
         this.$el.removeEventListener('touchend',this.touchEnd,false);
+        
       },
       resetTouchMoveDistance() {
         this.animeInstance = anime({
@@ -276,7 +359,35 @@
             // this.startAutoPlay()
           }
         })
-      }
+      },
+      getSlideAngle(dx, dy) {
+        return Math.atan2(dy, dx) * 180 / Math.PI
+      },
+      getSlideDirection(startX, startY, endX, endY) {
+        //根据起点和终点返回方向 1：向上，2：向下，3：向左，4：向右,0：未滑动  
+        var dy = startY - endY;  
+        var dx = endX - startX;  
+        var result = 0;  
+
+        //如果滑动距离太短  
+        // if(Math.abs(dx) < 2 && Math.abs(dy) < 2) {  
+        //     returnresult;  
+        // }  
+
+        var angle = this.getSlideAngle(dx, dy);  
+        if(angle >= -45 && angle < 45) {  
+            result = 4;  
+        }else if (angle >= 45 && angle < 135) {  
+            result = 1;  
+        }else if (angle >= -135 && angle < -45) {  
+            result = 2;  
+        }  
+        else if ((angle >= 135 && angle <= 180) || (angle >= -180 && angle < -135)) {  
+            result = 3;  
+        }  
+
+        return result;  
+      },
     }
 
   }
@@ -289,6 +400,7 @@
   width: 100%;
   // height: 140px;
   overflow: hidden;
+  pointer-events:none;
   .ax-swiper-wrapper {
     display: flex;
     position: relative;
@@ -296,6 +408,7 @@
     min-height: 100%;
     height: 100%;
     z-index: 1;
+    pointer-events:auto;
     // display: inline-flex;
   }
 }

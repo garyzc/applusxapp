@@ -161,6 +161,9 @@
     .ax-navbar-mid {
       color: $White;
     }
+    .ax-icon {
+      color: $White;
+    }
     
   }
 </style>

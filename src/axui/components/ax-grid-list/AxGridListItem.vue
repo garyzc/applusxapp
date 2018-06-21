@@ -1,23 +1,35 @@
 <template>
-  <div class="ax-list-item" :class="{'ax-list-item-clear':(index+1)%$parent.columns==0,'ax-list-item-withcheck':$slots.check != null}" :style="cstyle">
+  <div class="ax-list-item" :class="{'ax-list-item-clear':(index+1)%$parent.columns==0,'ax-list-item-withcheck':$slots.check != null,'ax-list-item-flex-columns':direction}" :style="cstyle">
+    
     <div class="ax-list-item-check" v-if="$slots.check != null">
       <slot name="check"></slot>
     </div>
+
+    <div class="ax-list-item-imgs" v-if="$slots.imgs">
+      <router-link tag="a" :to="to">
+        <slot name="imgs">
+        </slot>
+      </router-link>
+    </div>
     
-      <div class="ax-list-item-img">
+    <div class="ax-list-item-img" v-if="$slots.img">
+      <router-link tag="a" :to="to">
+        <slot name="img">
+        </slot>
+      </router-link>
+    </div>
+    
+    <slot></slot>
+
+    <div class="ax-list-item-text">
+      <div class="ax-list-item-title">
         <router-link tag="a" :to="to">
-        <img :src="data.img" />
+          <slot name="title">
+          </slot>
         </router-link>
       </div>
-      <div class="ax-list-item-text">
-        <div class="ax-list-item-title">
-          <router-link tag="a" :to="to">
-          {{data.text}}
-          </router-link>
-        </div>
-        <slot name="bottom"></slot>
-      </div>
-    <slot></slot>
+      <slot name="bottom"></slot>
+    </div>
     
   </div>
 </template>
@@ -32,6 +44,12 @@
       AxCheckbox,
     },
     props: {
+      direction: {
+        default: false
+      },
+      gap: {
+        default: 0
+      },
       check: {
         default: null
       },
@@ -72,10 +90,10 @@
     },
     computed: {
       cstyle: function() {
-        let col_space = (20)*0.1333333+'vw'
-        let space = (((750-(750/this.$parent.columns-20)*this.$parent.columns)/(this.$parent.columns*1+1)))*0.1333333+'vw'
+        let col_space = (this.gap)*0.1333333+'vw'
+        let space = (((750-(750/this.$parent.columns-this.gap)*this.$parent.columns)/(this.$parent.columns*1+1)))*0.1333333+'vw'
         return {
-          width:this.$parent.showType == 'grid' ? (750/this.$parent.columns-20)*0.1333333+'vw' : (750-20*2)*0.1333333+'vw',
+          width:this.$parent.showType == 'grid' ? (750/this.$parent.columns-this.gap)*0.1333333+'vw' : (750-this.gap*2)*0.1333333+'vw',
           marginLeft: this.$parent.showType == 'grid'? space: col_space,
           marginBottom: this.$parent.showType == 'grid'? space: col_space,
           marginRight: this.$parent.showType == 'grid'? 0 : col_space
@@ -125,6 +143,11 @@
       display: block;
       img {
 
+      }
+    }
+    .ax-list-item-imgs {
+      a {
+        display: flex;
       }
     }
   }
@@ -203,6 +226,9 @@
           width: 100%;
         }
       }
+    }
+    .ax-list-item-flex-columns {
+      flex-direction: column;
     }
     .ax-list-item-withcheck {
       .ax-list-item-text {

@@ -1,3 +1,5 @@
+var Mock = require('mockjs')
+var _ = require("lodash");
 const mock_avatars2 = [
     'https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png',
     'https://gw.alipayobjects.com/zos/rmsportal/cnrhVkzwxjPwAaCfPbdc.png',
@@ -35,20 +37,42 @@ const mock_titles = [
 const wrapRequest = (datas) => {
     return  datas
 }
+const orderitems = (num) => {
+
+    return _.times(num, function (n) {
+        return {
+            id: n+1,
+            product_id: 1,
+            product: {
+                image: Mock.Random.pick( mock_products ),
+                name: mock_titles[n%8],
+            },
+            checked: false,
+            price: 100,
+            ordernum: 1
+        }
+    })
+}
 module.exports = function () {
     var faker = require("faker");
     faker.locale = "zh_CN";
-    var _ = require("lodash");
+    
     return {
-        cart: wrapRequest(_.times(5, function (n) {
+        orders: wrapRequest(_.times(10, function (n) {
+            return {
+                id: n+1,
+                orderitems: orderitems(Mock.mock('@integer(1, 3)')),
+                state: Mock.mock('@integer(0, 3)'),
+                total: 100,
+            }
+        })),
+        cart: orderitems(5),
+        products: wrapRequest(_.times(100, function (n) {
             return {
                 id: n+1,
                 img: mock_products[n%8],
                 text: mock_titles[n%8],
-                avatar: faker.internet.avatar(),
-                checked: false,
-                price: 100,
-                ordernum: 1
+                avatar: faker.internet.avatar()
             }
         })),
         search: wrapRequest(_.times(100, function (n) {

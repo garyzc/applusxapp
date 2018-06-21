@@ -8,7 +8,10 @@
       </AxNavbar>
 
       <AxGridList :showType="listShowType == 'icon-list' ? 'col':'grid'">
-        <AxGridListItem v-for="(item,index) in $store.state.search.list" :key="index" :data="item" :to="{name:'product'}"></AxGridListItem>
+        <AxGridListItem v-for="(item,index) in $store.state.search.list" :key="index" :data="item" :to="{name:'product'}">
+          <img :src="item.img" slot="img" />
+          <template slot="title">{{item.text}}</template>
+        </AxGridListItem>
       </AxGridList>
 
     </AxLayout>

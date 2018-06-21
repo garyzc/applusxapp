@@ -8,6 +8,7 @@ import mutations from './mutations'
 
 import search from './modules/search'
 import cart from './modules/cart'
+import order from './modules/order'
 
 Vue.use(Vuex)
 
@@ -19,6 +20,7 @@ export default new Vuex.Store({
   modules: {
     search,
     cart,
+    order,
   },
   strict: debug,
   plugins: debug ? [createLogger()] : []

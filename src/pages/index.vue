@@ -1,13 +1,14 @@
 <template>
   <AxLayout>
 
-    <AxLayoutPage>
-      <transition>
+    <!-- <AxLayoutPage>
+      
+    </AxLayoutPage> -->
+    <transition>
         <keep-alive>
           <router-view class="view-page"  ></router-view>
         </keep-alive>
       </transition>
-    </AxLayoutPage>
 
     <AxTabBar slot="bottom">
         <AxTabBarPane title="首页" :to="{name:'home'}" icon="icon-home_light"></AxTabBarPane>
@@ -67,10 +68,13 @@ let cachedTransition = 'slide-right'
   }
 </script>
 
-<style >
+<style lang="scss">
 .title
 {
   margin: 50px 0;
+}
+.page-index-bottom {
+  height: $ax_tabs_height;
 }
 
 </style>

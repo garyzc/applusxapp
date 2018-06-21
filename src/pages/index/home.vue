@@ -14,8 +14,11 @@
     </AxFlex>
 
     
-    <AxGridList title="猜你喜欢">
-      <AxGridListItem v-for="(item,index) in FavGridList" :index="index" :key="index" :data="item" ></AxGridListItem>
+    <AxGridList title="猜你喜欢" >
+      <AxGridListItem v-for="(item,index) in FavGridList" :index="index" :key="index" :data="item" :gap="20">
+        <img :src="item.img" slot="img" />
+        <template slot="title">{{item.text}}</template>
+      </AxGridListItem>
     </AxGridList>
     <router-link :to="{path:'login'}">登录</router-link>
     index

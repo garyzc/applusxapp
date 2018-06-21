@@ -4,6 +4,9 @@
       <div class="ax-list-content">
         <slot></slot>
       </div>
+      <div class="ax-list-extra">
+        <slot name="extra"></slot>
+      </div>
       <div class="ax-list-arrow" v-if="arrow != null">
         <AxIcon  type="icon-right" />
       </div>
@@ -86,6 +89,10 @@
       padding: 30px;
       .ax-list-content {
         font-size: 32px;
+        flex: 1;
+      }
+      .ax-list-extra {
+        font-size: 25px;
       }
       .ax-list-arrow {
         // height: 25px;

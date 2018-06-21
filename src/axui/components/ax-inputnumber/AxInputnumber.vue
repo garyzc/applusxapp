@@ -1,7 +1,7 @@
 <template>
   <span class="ax-inputnumber" :class="['ax-button-type-'+type,'ax-button-size-'+type,{'ax-button-fit':fit != null},{'ax-inputnumber-disable':isDisabled}]">
     <span class="ax-inputnumber-btn ax-inputnumber-reduce" @click="reduce" :class="classReduce">-</span>
-    <input type="text" v-model="value" class="ax-inputnumber-input" :disabled="isDisabled" />
+    <input type="text" :value="value" class="ax-inputnumber-input" :disabled="isDisabled" @keyup="input"  />
     <span class="ax-inputnumber-btn ax-inputnumber-add" @click="add" :class="classAdd">+</span>
   </span>
 </template>
@@ -28,7 +28,10 @@
       min: null,
       max: null,
       disable: null,
-      type: null
+      type: null,
+      step: {
+        default:1,
+      }
     },
 
     data() {
@@ -67,10 +70,10 @@
 
         if(this.min != null) {
           if(this.value > this.min) {
-            this.$emit('change', this.value - 1)
+            this.$emit('change', this.value - this.step)
           }
         } else {
-          this.$emit('change', this.value - 1)
+          this.$emit('change', this.value - this.step)
         }
       },
       add() {
@@ -78,12 +81,23 @@
 
         if(this.max != null) {
           if(this.value > this.max) {
-            this.$emit('change', this.value + 1)
+            this.$emit('change', this.value + this.step)
           }
         } else {
-          this.$emit('change', this.value + 1 )
+          this.$emit('change', this.value + this.step )
         }
       },
+      input(e) {
+        //正整数
+        //replace(/\D/g,'')
+        //正数、小数
+        //replace(/[^\d.]/g,'')
+        //正数、小数、负数
+        //replace(/[^\-?\d.]/g,'')
+        let v = e.target.value
+        v = v.replace(/\D/g,'')
+        this.$emit('change', v )
+      }
     }
 
   }

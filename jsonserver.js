@@ -3,7 +3,8 @@ const server = jsonServer.create()
 const db = require('./mock/faker-data.js')
 const router = jsonServer.router(db())
 const middlewares = jsonServer.defaults()
-const host = 'localhost'
+// const host = 'localhost'
+const host = '172.101.106.2'
 const port = 3004
 
 server.use(jsonServer.bodyParser);

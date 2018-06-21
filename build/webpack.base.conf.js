@@ -69,7 +69,11 @@ module.exports = {
           name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
         }
       }
-    ]
+    ],
+    loaders: [{
+      test: require.resolve('sprint-js'),
+      loader: 'exports-loader?window.sp!script-loader'
+    }]
   },
   node: {
     // prevent webpack from injecting useless setImmediate polyfill because Vue

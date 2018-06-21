@@ -76,9 +76,12 @@ $ax_tabs_height: 104px;
 $ax_navbar_height: 100px;
 $ax_navbar_top_height: 45px;
 
+$ax_layout_bottom1_height: 104px;
 $ax_layout_bottom_height: 104px;
-$ax_layout_bottom2_height: 208px;
+
+
 $ax_layout_top_height: $ax_navbar_height + $ax_navbar_top_height;
+$ax_layout_top1_height: $ax_navbar_height + $ax_navbar_top_height + 75px;
 
 /**
 *骨架

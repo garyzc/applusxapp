@@ -8,6 +8,30 @@ export const state = () => ({
 })
 
 const getters = {
+  pay: (state, getters) => {
+    let paylist = state.list.filter((item)=>{
+      return item.state == 0
+    })
+    return paylist
+  },
+  collect: (state, getters) => {
+    let paylist = state.list.filter((item)=>{
+      return item.state == 1
+    })
+    return paylist
+  },
+  complete: (state, getters) => {
+    let paylist = state.list.filter((item)=>{
+      return item.state == 2
+    })
+    return paylist
+  },
+  cancel: (state, getters) => {
+    let paylist = state.list.filter((item)=>{
+      return item.state == 3
+    })
+    return paylist
+  },
   total: (state, getters) => {
     return state.list.reduce((value,item)=>{
       if(item.checked) {
@@ -35,7 +59,7 @@ const getters = {
 export const actions = {
   
   async query({ commit, state }, context) {
-    let { data } = await apiUtil.get('/cart', {
+    let { data } = await apiUtil.get('/orders', {
       params: {
         
       }

@@ -38,6 +38,7 @@
 
   .ax-tabbar-wrap {
     width: 100%;
+    height: $ax_tabs_height;
   }
   .ax-tabbar {
     background-color: #fff;

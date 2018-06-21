@@ -2661,6 +2661,13 @@ expect@^22.4.0:
     jest-message-util "^22.4.3"
     jest-regex-util "^22.4.3"
 
+exports-loader@^0.7.0:
+  version "0.7.0"
+  resolved "http://registry.npm.taobao.org/exports-loader/download/exports-loader-0.7.0.tgz#84881c784dea6036b8e1cd1dac3da9b6409e21a5"
+  dependencies:
+    loader-utils "^1.1.0"
+    source-map "0.5.0"
+
 express-urlrewrite@^1.2.0:
   version "1.2.0"
   resolved "http://registry.npm.taobao.org/express-urlrewrite/download/express-urlrewrite-1.2.0.tgz#8e667b7761ff1c7ffdb0efa05d64035387c823eb"
@@ -6609,6 +6616,10 @@ raw-body@2.3.2:
     iconv-lite "0.4.19"
     unpipe "1.0.0"
 
+raw-loader@~0.5.1:
+  version "0.5.1"
+  resolved "http://registry.npm.taobao.org/raw-loader/download/raw-loader-0.5.1.tgz#0c3d0beaed8a01c966d9787bf778281252a979aa"
+
 rc@^1.0.1, rc@^1.1.6, rc@^1.1.7:
   version "1.2.8"
   resolved "http://registry.npm.taobao.org/rc/download/rc-1.2.8.tgz#cd924bf5200a075b83c188cd6b9e211b7fc0d3ed"
@@ -7063,6 +7074,12 @@ schema-utils@^0.4.0, schema-utils@^0.4.5:
     ajv "^6.1.0"
     ajv-keywords "^3.1.0"
 
+script-loader@^0.7.2:
+  version "0.7.2"
+  resolved "http://registry.npm.taobao.org/script-loader/download/script-loader-0.7.2.tgz#2016db6f86f25f5cf56da38915d83378bb166ba7"
+  dependencies:
+    raw-loader "~0.5.1"
+
 scss-tokenizer@^0.2.3:
   version "0.2.3"
   resolved "http://registry.npm.taobao.org/scss-tokenizer/download/scss-tokenizer-0.2.3.tgz#8eb06db9a9723333824d3f5530641149847ce5d1"
@@ -7353,6 +7370,10 @@ source-map-url@^0.4.0:
   version "0.4.0"
   resolved "http://registry.npm.taobao.org/source-map-url/download/source-map-url-0.4.0.tgz#3e935d7ddd73631b97659956d55128e87b5084a3"
 
+source-map@0.5.0:
+  version "0.5.0"
+  resolved "http://registry.npm.taobao.org/source-map/download/source-map-0.5.0.tgz#0fe96503ac86a5adb5de63f4e412ae4872cdbe86"
+
 source-map@0.5.x, source-map@^0.5.3, source-map@^0.5.6, source-map@^0.5.7, source-map@~0.5.1:
   version "0.5.7"
   resolved "http://registry.npm.taobao.org/source-map/download/source-map-0.5.7.tgz#8a039d2d1021d22d1ea14c80d8ea468ba2ef3fcc"
@@ -7423,6 +7444,10 @@ split@0.3:
   resolved "http://registry.npm.taobao.org/split/download/split-0.3.3.tgz#cd0eea5e63a211dfff7eb0f091c4133e2d0dd28f"
   dependencies:
     through "2"
+
+sprint-js@^0.1.0:
+  version "0.1.0"
+  resolved "http://registry.npm.taobao.org/sprint-js/download/sprint-js-0.1.0.tgz#8fd7522b3563af003e30f18d71eba0c19ba509c2"
 
 sprintf-js@~1.0.2:
   version "1.0.3"

@@ -19,7 +19,7 @@
       <AxCard radius="small">
         <div slot="hl">我的订单</div>
         <AxButton type="text" slot="hr">
-          <router-link :to="{name:'home'}">查看更多订单<AxIcon type="icon-right" /></router-link>
+          <router-link :to="{name:'order'}">查看更多订单<AxIcon type="icon-right" /></router-link>
         </AxButton>
 
         <AxGrid :data="GridList" colnums="5" />

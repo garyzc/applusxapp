@@ -76,6 +76,18 @@ const profile = {
   component:  (resolve) => { require(['../pages/profile.vue'], resolve)},
   meta: { title:'个人信息' },
 }
+const checkout = {
+  path: '/checkout',
+  name: 'checkout',
+  component:  (resolve) => { require(['../pages/checkout.vue'], resolve)},
+  meta: { title:'结算' },
+}
+const order = {
+  path: '/order/:state?',
+  name: 'order',
+  component:  (resolve) => { require(['../pages/order.vue'], resolve)},
+  meta: { title:'我的订单' },
+}
 
 const routes = [
   index,
@@ -83,6 +95,8 @@ const routes = [
   product,
   setting,
   profile,
+  checkout,
+  order,
 
 ]
 

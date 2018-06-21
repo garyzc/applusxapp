@@ -4,12 +4,19 @@
   </div>
 </template>
 <script>
+  // import AxSwiperItem from '../ax-swiper/AxSwiperItem'
   export default {
     name: 'AxTabsPane',
     async fetch  (context) {
 
     },
+    components: {
+      // AxSwiperItem,
+    },
     props: {
+      label: {
+        default: ''
+      },
       type: {
         default: () => {
           return 'default'
@@ -55,20 +62,9 @@
 </script>
 
 <style lang="scss" >
-
-  .ax-tabs-tab-item {
-    -webkit-box-pack: center;
-    -webkit-justify-content: center;
-    -ms-flex-pack: center;
-    justify-content: center;
-    -webkit-box-align: center;
-    -webkit-align-items: center;
-    -ms-flex-align: center;
-    align-items: center;
-    font-size: 15px;
-    height: 43.5px;
-    line-height: 43.5px;
+  .ax-tabs-pane {
+    width: 100%;
   }
-  
+
   
 </style>
